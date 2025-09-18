@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="多摩大学　多摩大学附属聖ヶ丘中学高等学校のバスの時間を教えてくれます　　作者の情報などをを教えてくれます">
+      <link rel="icon" href="aikonn tannpin .png" type="image/png">
+  <link rel ="stylesheet" href="styles4.css">
+  <title>バスいつ？　詳しい情報　作者の情報などをを教えてくれます</title>
+  <style>
+    /* ===== リセット & 基本設定 ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: sans-serif;
+      background: #fff;
+    }
+
+    /* ===== スプラッシュ画面 ===== */
+    #splash {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
+
+    #splash img {
+      width: 200px;
+      max-width: 80vw;
+      height: auto;
+      animation: fadeout 1s ease 2s forwards;
+    }
+
+    @keyframes fadeout {
+      to { opacity: 0; }
+    }
+
+    body.loaded #splash {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    #page {
+      display: none;
+    }
+
+    body.loaded #page {
+      display: block;
+    }
+
+    /* ===== ヘッダー（レスポンシブ対応） ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 36px;
+      max-height: 8vh;
+    }
+
+    .menu-button {
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: block;
+    }
+
+     nav {
+      position: absolute;
+      top: 56px;
+      right: 16px;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex-direction: column;
+      padding: 10px;
+      gap: 10px;
+      display: none;
+      z-index: 200;
+    }
+    nav.show {
+      display: flex;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      padding: 10px 15px;
+      min-width: 150px;
+    }
+
+    /* ===== PC用スタイル ===== */
+    @media (min-width: 768px) {
+      .menu-button {
+        display: none;
+      }
+
+      nav {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        gap: 20px;
+      }
+
+      nav.show {
+        display: flex !important;
+      }
+    }
+
+    /* ===== メインコンテンツ ===== */
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- スプラッシュ画面 -->
+  <div id="splash">
+    <img src="aikonn tannpin .png"alt="ロゴ">
+  </div>
+
+  <!-- ページ本体 -->
+  <div id="page">
+    <!-- ヘッダー -->
+ <header>
+  <div class="logo">
+<a href="../HOME/HOME.html">
+  <img src="../IMEGES/aikon.png" alt="ロゴ">
+</a>
+
+
+  </div>
+  <button class="menu-button" id="menuButton">☰</button>
+  <nav id="menu">
+     <a href="https://basuitsu.github.io/seiseki/seiseki.html">聖蹟~学校方面　時刻表</a>
+        <a href="https://basuitsu.github.io/nagayama/nagayama.html">永山~学校方面　時刻表</a>
+        <a href="https://basuitsu.github.io/sonota/sonota.html">その他　いろいろ</a>
+
+
+  </nav>
+</header>
+
+
+    <!-- メイン -->
+    <main>
+    　<p>疲れた</p>
+      <p>このサイトは改変していいけど下のようにしてね！</p>
+      <a href="https://creativecommons.org">バスいつ？</a> © 2025 by <a href="https://creativecommons.org">しりとる</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+    </main>
+  
+  <!-- JavaScript -->
+  <script>
+    // スプラッシュ制御
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.body.classList.add('loaded');
+      }, 3000); // スプラッシュ表示時間
+    });
+
+
+
+    // メニュー開閉
+    const menuBtn = document.getElementById('menuButton');
+    const nav = document.getElementById('menu');
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+
+//スマホ版メニューバー　動作
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuBtn = document.getElementById('menuButton');
+    const nav = document.getElementById('menu');
+
+    if (menuBtn && nav) {
+      menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('show');
+      });
+    } else {
+      console.error("menuButton または menu が見つかりません。ID を確認してください。");
+    }
+  });
+</script>
+
+
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuBtn = document.getElementById('menuButton');
+    const nav = document.getElementById('menu');
+
+    if (menuBtn && nav) {
+      menuBtn.addEventListener('click', function () {
+        nav.classList.toggle('show');
+      });
+    }
+  });
+</script>
+
+
+<!--ここまで掲示用除いてテンプレート-->
+
+
+
+
+</body>
+</html> 
